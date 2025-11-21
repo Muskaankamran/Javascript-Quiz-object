@@ -60,3 +60,52 @@ var javascriptQuiz ={
     correct: "",
  },
 }
+
+var keys = Object.keys(javascriptQuiz);
+var index = 0;
+var score = 0;
+
+function loadQuestion() {
+    let qKey = keys[index];
+    let qData = javascriptQuiz[qKey];
+
+    document.getElementById("qTitle").innerText = qKey;
+    document.getElementById("qText").innerText = qData.text;
+
+    let choicesHtml = "";
+    qData.choices.forEach((choice, i) => {
+        choicesHtml += `
+            <div class="form-check">
+                <input class="form-check-input" type="radio" name="answer" id="option${i}" value="${choice}">
+                <label class="form-check-label" for="option${i}">${choice}</label>
+            </div>
+        `;
+    });
+
+    document.getElementById("qChoices").innerHTML = choicesHtml;
+}
+
+document.getElementById("nextBtn").addEventListener("click", () => {
+    let selected = document.querySelector("input[name='answer']:checked");
+    if(!selected) {
+        Swal.fire({
+         title: 'Select an answer',
+         theme: 'dark'
+         
+       })
+        return;
+    }
+    let correctAnswer = javascriptQuiz[keys[index]].correct;
+    if(selected.value === correctAnswer) score++;
+    index++;
+    if(index < keys.length){
+        loadQuestion();
+    } else {
+        document.getElementById("qTitle").innerText = "Quiz Completed!";
+        document.getElementById("qText").innerText = `Your Score: ${score} / ${keys.length}`;
+        document.getElementById("qChoices").innerHTML = "";
+        document.getElementById("nextBtn").style.display = "none";
+    }
+});
+loadQuestion();
+  
