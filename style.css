@@ -1,0 +1,18 @@
+body {
+    background-color: #8ffce4;
+    background-repeat: no-repeat;
+    background-size: cover;
+    font-family: "Poppins", sans-serif;
+  }
+  .signin-btn{
+    background-color: #d38bb4;
+  }
+  .signin-btn:hover{
+    background-color: #d38bb4;
+  }
+  #signUpFormContainer {
+    border-radius: 10px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    margin: 0 auto;
+  }
+  

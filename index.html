@@ -4,8 +4,39 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
+    <div id="signUpFormContainer" class="card p-4 mx-auto mt-5 signupform" style="width: 30rem;">
+        <h2 class="text-center mb-4">
+          <img class="logo" src="./Images/logo.png" alt="logo" width="50" />
+          Sign Up Form
+        </h2>
+    
+        <form id="signUpForm">
+          <div class="row g-3">
+            <div class="col-md-6">
+              <label class="form-label">First name</label>
+              <input required type="text" class="form-control" id="inputFirstName" />
+            </div>
+            <div class="col-md-6">
+              <label class="form-label">Last name</label>
+              <input required type="text" class="form-control" id="inputLastName" />
+            </div>
+            <div class="col-md-6">
+              <label class="form-label">Email</label>
+              <input required type="email" class="form-control" id="inputEmail4" />
+            </div>
+            <div class="col-md-6">
+              <label class="form-label">Password</label>
+              <input required type="password" class="form-control" id="inputPassword4" />
+            </div>
+            <div class="col-12">
+                <button type="submit" onclick="signIn()" class="btn signin-btn w-100">Sign In</button>
+              </div>
+            </div>
+          </form>
+        </div>
     <script src="app.js"></script>
 </body>
 </html>
