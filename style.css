@@ -1,3 +1,41 @@
-.card-header{
-  background-color: rgb(143, 102, 182);
+  body {
+     background:#367797; 
+  }
+#container, #result-container { 
+  border-radius:10px; 
+  background-color:#728b97;
+ }
+.options label { 
+  font-size:1.1rem; 
+  cursor:pointer; 
+  display:block; 
+  margin-bottom:10px; 
+  color:#6b8491;
+ }
+.options input {
+   margin-right:10px; 
+  color:#455a64; 
+}
+.showbutton { 
+  text-decoration:none; 
+  color:#31596d;
+   font-size:18px; 
+  }
+.showbutton:hover { 
+  text-decoration: underline;
+   color:#31596d;
+   }
+.backgroundcard {
+   background: linear-gradient(90deg, rgba(194,234,255,1) 0%, rgba(153,153,232,1) 35%, rgba(89,204,217,1) 100%); 
+  }
+.buttonlogin, .buttonsignup { 
+  background-color: #48bfff;
+   border-radius:2px;
+    border:1px solid #2cb5ff;
+     color:white; 
+    }
+.buttonlogin:hover, .buttonsignup:hover {
+  background-color: #48bfff; 
+  border:1px solid #2cb5ff;
+   color:white; 
 }
