@@ -10,13 +10,13 @@
 </head>
 
 <body>
- <!-- NAVBAR -->
+
 <nav id="navbar" class="navbar navbar-dark bg-dark px-3" style="display:none;">
   <span class="navbar-brand mb-0 h1 text-white">JavaScript Quiz</span>
   
   <div class="dropdown ms-auto">
     <button class="btn btn-light dropdown-toggle d-flex align-items-center" data-bs-toggle="dropdown">
-      <!-- PROFILE IMAGE -->
+
       <img src="./images/avator.jpg" alt="Profile" id="profileImg" style="width:35px; height:35px; border-radius:50%; margin-right:8px;">
     </button>
     <ul class="dropdown-menu dropdown-menu-end">
@@ -25,8 +25,6 @@
     </ul>
   </div>
 </nav>
-
-<!-- PROFILE MODAL -->
 <div class="modal fade" id="profileModal">
   <div class="modal-dialog">
     <div class="modal-content">
@@ -43,37 +41,47 @@
   </div>
 </div>
 
-
-<!-- AUTH / QUIZ CONTAINER -->
 <div class="container mt-5">
   <div class="row justify-content-center">
     <div class="col-md-6">
 
-      <!-- Login/Signup Container -->
+  
       <div id="auth-container" class="shadow p-4 rounded backgroundcard">
 
-        <!-- LOGIN FORM -->
+  
         <div id="login-form">
           <h3 class="text-center mb-4">Login</h3>
           <label>Email</label>
           <input type="email" class="form-control mb-3" id="loginEmail" />
           <label>Password</label>
-          <input type="password" class="form-control mb-3" id="loginPassword" />
+<div class="password-wrapper mb-3">
+  <input type="password" class="form-control" id="loginPassword" />
+  <img src="./images/eye show.png" class="toggle-eye" onclick="togglePassword('loginPassword', this)" />
+</div>
+
+          
           <button class="btn buttonlogin w-100" onclick="handleLogin()">Login</button>
+
           <p class="mt-3 text-center">
             Don't have an account? <a href="#" class="showbutton" onclick="showSignup()">Signup here</a>
           </p>
         </div>
 
-        <!-- SIGNUP FORM -->
+      
         <div id="signup-form" style="display:none;">
           <h3 class="text-center mb-4">Signup</h3>
           <label>Name</label>
           <input type="text" class="form-control mb-3" id="signupName" placeholder="Enter name" />
           <label>Email</label>
           <input type="email" class="form-control mb-3" id="signupEmail" placeholder="Enter email" />
-          <label>Password</label>
-          <input type="password" class="form-control mb-3" id="signupPassword" placeholder="Enter password" />
+        
+        <label>Password</label>
+<div class="password-wrapper mb-3">
+  <input type="password" class="form-control" id="signupPassword" />
+  <img src="./images/eye show.png" class="toggle-eye" onclick="togglePassword('signupPassword', this)" />
+</div>
+
+
           <button class="btn buttonsignup w-100" onclick="handleSignup()">Signup</button>
           <p class="mt-3 text-center">
             Already have an account? <a href="#" class="showbutton" onclick="showLogin()">Login here</a>
@@ -81,7 +89,7 @@
         </div>
       </div>
 
-      <!-- QUIZ -->
+      
       <div id="quiz-wrapper" style="display:none;">
         <div id="container" class="shadow p-4 bg-white rounded"></div>
         <div id="result-container" class="shadow p-4 bg-white rounded text-center" style="display:none;">

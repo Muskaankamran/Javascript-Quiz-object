@@ -4,25 +4,25 @@ var loggedInUser = null;
 
 // Quiz Questions
 var questions = [
-    {question: "Which company developed JavaScript?", options:["Microsoft", "Sun Microsystems", "Netscape", "IBM"], ans:"Netscape"},
-    {question: "Which array method adds an item to the end?", options:["push()", "pop()", "shift()", "unshift()"], ans:"push()"},
-    {question: "What is the output of: typeof null?", options:["object", "null", "undefined", "string"], ans:"object"},
-    {question: "Which operator is used for strict equality?", options:["==", "===", "=", "!="], ans:"==="},
-    {question: "JavaScript runs in the ______.", options:["Browser", "TV", "Keyboard", "Speaker"], ans:"Browser"},
-    {question: "Inside which HTML element do we put JavaScript?", options:["javascript", "script", "js", "code"], ans:"script"},
-    {question: "What does DOM stand for?", options:["Document Object Model", "Data Object Method", "Desktop Oriented Mode", "Document Oriented Markup"], ans:"Document Object Model"},
-    {question: "Which keyword declares a variable?", options:["var", "let", "const", "All of the above"], ans:"All of the above"},
-    {question: "How do you write a comment in JavaScript?", options:["!-- comment --", "# comment", "// comment", "$ comment"], ans:"// comment"},
-    {question: "What is JavaScript used for?", options:["Styling webpages", "Adding interactivity to webpages", "Storing data on servers", "Designing logos"], ans:"Adding interactivity to webpages"},
-    {question: "What file extension does JavaScript use?", options:[".html", ".css", ".java", ".js"], ans:".js"},
-    {question: "Which method shows a pop-up message?", options:["alert()", "show()", "popup()", "print()"], ans:"alert()"}
+  {question: "Which company developed JavaScript?", options:["Microsoft", "Sun Microsystems", "Netscape", "IBM"], ans:"Netscape"},
+  {question: "Which array method adds an item to the end?", options:["push()", "pop()", "shift()", "unshift()"], ans:"push()"},
+  {question: "What is the output of: typeof null?", options:["object", "null", "undefined", "string"], ans:"object"},
+  {question: "Which operator is used for strict equality?", options:["==", "===", "=", "!="], ans:"==="},
+  {question: "JavaScript runs in the ______.", options:["Browser", "TV", "Keyboard", "Speaker"], ans:"Browser"},
+  {question: "Inside which HTML element do we put JavaScript?", options:["javascript", "script", "js", "code"], ans:"script"},
+  {question: "What does DOM stand for?", options:["Document Object Model", "Data Object Method", "Desktop Oriented Mode", "Document Oriented Markup"], ans:"Document Object Model"},
+  {question: "Which keyword declares a variable?", options:["var", "let", "const", "All of the above"], ans:"All of the above"},
+  {question: "How do you write a comment in JavaScript?", options:["!-- comment --", "# comment", "// comment", "$ comment"], ans:"// comment"},
+  {question: "What is JavaScript used for?", options:["Styling webpages", "Adding interactivity to webpages", "Storing data on servers", "Designing logos"], ans:"Adding interactivity to webpages"},
+  {question: "What file extension does JavaScript use?", options:[".html", ".css", ".java", ".js"], ans:".js"},
+  {question: "Which method shows a pop-up message?", options:["alert()", "show()", "popup()", "print()"], ans:"alert()"}
 ];
 
 var index = 0;
 var score = 0;
 var selectedAnswers = [];
 
-// Use the uploaded profile image as default
+// Default profile image
 const defaultProfileImage = './images/avator.jpg';
 
 // Show signup form
@@ -37,7 +37,20 @@ function showLogin() {
   document.getElementById('login-form').style.display = 'block';
 }
 
-// Handle signup and directly show quiz
+// Toggle password image
+function togglePassword(inputId, img) {
+  const input = document.getElementById(inputId);
+
+  if (input.type === "password") {
+    input.type = "text";
+    img.src = "./images/eye hide.png";
+  } else {
+    input.type = "password";
+    img.src = "./images/eye show.png";
+  }
+}
+
+// Handle signup
 function handleSignup() {
   const name = document.getElementById('signupName').value.trim();
   const email = document.getElementById('signupEmail').value.trim();
@@ -53,11 +66,9 @@ function handleSignup() {
     return;
   }
 
-  // Save user with default profile image
   users.push({ name, email, password, profileImage: defaultProfileImage });
   loggedInUser = { name, email, password, profileImage: defaultProfileImage };
 
-  // Update navbar profile image
   document.getElementById('profileImg').src = loggedInUser.profileImage;
 
   Swal.fire({
@@ -71,7 +82,7 @@ function handleSignup() {
   });
 }
 
-// Handle login and show quiz
+// Handle login
 function handleLogin() {
   const email = document.getElementById('loginEmail').value.trim();
   const password = document.getElementById('loginPassword').value.trim();
@@ -89,7 +100,6 @@ function handleLogin() {
 
   loggedInUser = user;
 
-  // Update navbar profile image
   document.getElementById('profileImg').src = loggedInUser.profileImage || defaultProfileImage;
 
   Swal.fire({
@@ -103,7 +113,7 @@ function handleLogin() {
   });
 }
 
-// Show quiz and hide auth forms
+// Show quiz
 function showQuiz() {
   document.getElementById('auth-container').style.display = 'none';
   document.getElementById('quiz-wrapper').style.display = 'block';
@@ -131,94 +141,91 @@ function logout() {
 function renderQues() {
   var container = document.getElementById("container");
 
-  if(index >= questions.length){
-      showResult();
-      return;
+  if (index >= questions.length) {
+    showResult();
+    return;
   }
 
   let q = questions[index];
   let html = `
-      <h3 class="text-center text-body-secondary">JavaScript Quiz</h3>
-      <p class="fw-bold">${index+1}. ${q.question}</p>
-      <hr/>
+    <h3 class="text-center text-body-secondary">JavaScript Quiz</h3>
+    <p class="fw-bold">${index + 1}. ${q.question}</p>
+    <hr/>
   `;
 
   q.options.forEach(opt => {
-      html += `<div class="options"><label><input type="radio" name="option" value="${opt}"> ${opt}</label></div>`;
+    html += `<div class="options"><label><input type="radio" name="option" value="${opt}"> ${opt}</label></div>`;
   });
 
   html += `
-      <div class="d-flex justify-content-between mt-4">
-          <button id="prev" class="btn btn-primary" onclick="previousQuestion()">Previous</button>
-          <button id="next" class="btn btn-success" onclick="nextQuestion()">
-              ${index === questions.length-1 ? 'Submit' : 'Next'}
-          </button>
-      </div>
+    <div class="d-flex justify-content-between mt-4">
+      <button id="prev" class="btn btn-primary" onclick="previousQuestion()">Previous</button>
+      <button id="next" class="btn btn-success" onclick="nextQuestion()">
+        ${index === questions.length - 1 ? 'Submit' : 'Next'}
+      </button>
+    </div>
   `;
 
   container.innerHTML = html;
-
-  // Disable previous button on first question
   document.getElementById("prev").disabled = (index === 0);
 
-  // Restore previous answer if exists
-  if(selectedAnswers[index]){
-      let opts = document.getElementsByName("option");
-      opts.forEach(o => {
-          if(o.value === selectedAnswers[index]) o.checked = true;
-      });
+  if (selectedAnswers[index]) {
+    let opts = document.getElementsByName("option");
+    opts.forEach(o => {
+      if (o.value === selectedAnswers[index]) o.checked = true;
+    });
   }
 }
 
-// Next question
-function nextQuestion(){
+// Next Question
+function nextQuestion() {
   let opts = document.getElementsByName("option");
   let selected = '';
-  opts.forEach(o => { if(o.checked) selected = o.value; });
 
-  if(selected === ''){
-      Swal.fire('Please select an option before continuing.');
-      return;
+  opts.forEach(o => { if (o.checked) selected = o.value; });
+
+  if (selected === '') {
+    Swal.fire('Please select an option before continuing.');
+    return;
   }
 
   selectedAnswers[index] = selected;
 
-  // Count score only once
-  if(selected === questions[index].ans && !questions[index].counted){
-      score++;
-      questions[index].counted = true;
+  if (selected === questions[index].ans && !questions[index].counted) {
+    score++;
+    questions[index].counted = true;
   }
 
   index++;
   renderQues();
 }
 
-// Previous question
-function previousQuestion(){
-  if(index > 0) index--;
+// Previous Question
+function previousQuestion() {
+  if (index > 0) index--;
   renderQues();
 }
 
 // Show result
-function showResult(){
+function showResult() {
   document.getElementById("container").style.display = 'none';
   document.getElementById("result-container").style.display = 'block';
 
-  let percent = ((score/questions.length)*100).toFixed(2);
+  let percent = ((score / questions.length) * 100).toFixed(2);
   let scoreText = `You scored ${score}/${questions.length} (${percent}%)`;
 
-  if(percent >= 70){
-      scoreText = "🎉 Congratulations!<br>" + scoreText;
+  if (percent >= 70) {
+    scoreText = "🎉 Congratulations!<br>" + scoreText;
   } else {
-      scoreText = "❌ You Failed.<br>" + scoreText;
-      document.getElementById("score").style.color = "#dc3545";
+    scoreText = "❌ You Failed.<br>" + scoreText;
+    document.getElementById("score").style.color = "#dc3545";
   }
 
   document.getElementById("score").innerHTML = scoreText;
 }
 
 // Restart quiz
-function restartQuiz(){
+function restartQuiz() {
   index = 0;
   score = 0;
   selectedAnswers = [];
@@ -230,7 +237,7 @@ function restartQuiz(){
   renderQues();
 }
 
-// Show user profile modal with entered data
+// Show profile
 function showProfile() {
   if (!loggedInUser) return;
 

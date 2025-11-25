@@ -39,3 +39,21 @@
   border:1px solid #2cb5ff;
    color:white; 
 }
+.password-wrapper {
+  position: relative;
+}
+
+.password-wrapper .toggle-eye {
+  position: absolute;
+  right: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 20px;
+  height: 20px;
+  cursor: pointer;
+  opacity: 0.7;
+}
+
+.password-wrapper .toggle-eye:hover {
+  opacity: 1;
+}
